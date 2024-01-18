@@ -88,6 +88,23 @@ func showSavePanel() -> URL? {
     }
 }
 
+func showOpenPanel() -> URL? {
+    let panel = NSOpenPanel()
+    
+    panel.canCreateDirectories = false
+    panel.allowedContentTypes = [.html]
+    panel.allowsOtherFileTypes = false
+    panel.title = "Open HTML File"
+    panel.message = "Select your HTML file"
+        
+    if panel.runModal() == .OK {
+        return panel.url
+    } else {
+        return nil
+    }
+}
+
+
 struct ContentView: View {
     
     @State var htmlString_left: String = ""
@@ -97,7 +114,7 @@ struct ContentView: View {
     var body: some View {
         HStack {
             WebView(
-                urlString: "https://scholar.google.co.jp/scholar?hl=en&as_sdt=0%2C5&q=test&btnG=",
+                urlString: "https://scholar.google.com/",
                 htmlContent: $htmlString_left
             )
             
@@ -126,7 +143,17 @@ struct ContentView: View {
                         }
                     }
                 }
-                
+
+                Button ("Open") {
+                    if let url = showOpenPanel() {
+                        do {
+                            htmlString_right = try String(contentsOf: url)
+                        } catch {
+                            print("Failed to open file.")
+                        }
+                    }
+                }
+
                 Button ("Save") {
                     if let url = showSavePanel() {
                         do {
@@ -135,7 +162,6 @@ struct ContentView: View {
                             print("Failed to save.")
                         }
                     }
-                        
                 }
             }
             
