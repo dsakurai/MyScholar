@@ -67,7 +67,7 @@ struct WebViewWrapper: NSViewRepresentable {
     }
     
     func updateNSView(_ nsView: WKWebView, context: Context) {
-        nsView.loadHTMLString(htmlString, baseURL: URL(string: "https://scholar.google.co.jp")!)
+        nsView.loadHTMLString(htmlString, baseURL: URL(string: "https://scholar.google.com")!)
     }
 }
 
@@ -153,6 +153,7 @@ struct ContentView: View {
                         }
                     }
                 }
+                .keyboardShortcut("o", modifiers: .command)
 
                 Button ("Save") {
                     if let url = showSavePanel() {
@@ -163,6 +164,7 @@ struct ContentView: View {
                         }
                     }
                 }
+                .keyboardShortcut("s", modifiers: .command)
             }
             
             WebViewWrapper(
