@@ -14,7 +14,7 @@ import SwiftSoup
 struct WebView: NSViewRepresentable {
     let urlString: String
     
-    @ObservedObject var webViewState: WebViewState
+    @Binding var htmlContent: String
 
     func makeNSView(context: Context) -> WKWebView {
         let webView = WKWebView()
@@ -49,7 +49,7 @@ struct WebView: NSViewRepresentable {
                 
                 if let htmlString = html as? String {
                     // Now htmlString contains the entire HTML content of the page
-                    self.parent.webViewState.updateTitle(htmlString)
+                    self.parent.htmlContent = htmlString
                 } else if let error = error {
                     // Handle the error
                     print("Error getting HTML string: \(error.localizedDescription)")
@@ -59,30 +59,21 @@ struct WebView: NSViewRepresentable {
     }
 }
 
-class WebViewState: ObservableObject {
-    @Published var html_string: String = ""
-    
-    func updateTitle(_ html: String) {
-        html_string = html
-    }
-}
-
-
 struct ContentView: View {
     
-    @StateObject var webViewState = WebViewState()
+    @State var htmlString: String = ""
     
     var body: some View {
         HStack {
             WebView(
                 urlString: "https://scholar.google.co.jp/scholar?hl=en&as_sdt=0%2C5&q=test&btnG=",
-                webViewState: webViewState
+                htmlContent: $htmlString
             )
             .padding()
             
             Button("Test") {
                 print("hello")
-                print(webViewState.html_string)
+                print(htmlString)
             }
         }
     }
