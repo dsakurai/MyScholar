@@ -59,22 +59,60 @@ struct WebView: NSViewRepresentable {
     }
 }
 
+struct WebViewWrapper: NSViewRepresentable {
+    @Binding var htmlString: String
+    
+    func makeNSView(context: Context) -> WKWebView {
+        return WKWebView()
+    }
+    
+    func updateNSView(_ nsView: WKWebView, context: Context) {
+        nsView.loadHTMLString(htmlString, baseURL: URL(string: "https://scholar.google.co.jp")!)
+    }
+}
+
 struct ContentView: View {
     
-    @State var htmlString: String = ""
+    @State var htmlString_left: String = ""
+    
+    @State private var htmlString_right: String = ""
     
     var body: some View {
         HStack {
             WebView(
                 urlString: "https://scholar.google.co.jp/scholar?hl=en&as_sdt=0%2C5&q=test&btnG=",
-                htmlContent: $htmlString
+                htmlContent: $htmlString_left
             )
-            .padding()
-            
-            Button("Test") {
-                print("hello")
-                print(htmlString)
+
+            Button("=>") {
+                if self.htmlString_right == "" {
+                    self.htmlString_right = htmlString_left
+                } else {
+                    do {
+                        
+                        let doc_left: Document = try SwiftSoup.parse(htmlString_left)
+                        let divElements_left = try doc_left.select("div.gs_r.gs_or.gs_scl")
+                        
+                        let doc_right: Document = try SwiftSoup.parse(htmlString_right)
+                        
+                        for div_left in divElements_left {
+                            let right = try doc_right.select("div.gs_r.gs_or.gs_scl")
+                            if let right_last = right.last() {
+                                try right_last.after(div_left)
+                            }
+                        }
+                     
+                        try self.htmlString_right = doc_right.outerHtml()
+                    } catch {
+                        print("Error parsing HTML")
+                    }
+                }
             }
+            
+            WebViewWrapper(
+                htmlString: $htmlString_right
+            )
+            
         }
     }
 }
