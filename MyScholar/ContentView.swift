@@ -71,6 +71,23 @@ struct WebViewWrapper: NSViewRepresentable {
     }
 }
 
+func showSavePanel() -> URL? {
+    let panel = NSSavePanel()
+    
+    panel.canCreateDirectories = true
+    panel.allowedContentTypes = [.html]
+    panel.allowsOtherFileTypes = false
+    panel.title = "Save HTML File"
+    panel.message = "Select a location to save your HTML file"
+    panel.nameFieldStringValue = "Citing.html"
+        
+    if panel.runModal() == .OK {
+        return panel.url
+    } else {
+        return nil
+    }
+}
+
 struct ContentView: View {
     
     @State var htmlString_left: String = ""
@@ -83,29 +100,42 @@ struct ContentView: View {
                 urlString: "https://scholar.google.co.jp/scholar?hl=en&as_sdt=0%2C5&q=test&btnG=",
                 htmlContent: $htmlString_left
             )
-
-            Button("=>") {
-                if self.htmlString_right == "" {
-                    self.htmlString_right = htmlString_left
-                } else {
-                    do {
-                        
-                        let doc_left: Document = try SwiftSoup.parse(htmlString_left)
-                        let divElements_left = try doc_left.select("div.gs_r.gs_or.gs_scl")
-                        
-                        let doc_right: Document = try SwiftSoup.parse(htmlString_right)
-                        
-                        for div_left in divElements_left {
-                            let right = try doc_right.select("div.gs_r.gs_or.gs_scl")
-                            if let right_last = right.last() {
-                                try right_last.after(div_left)
+            
+            VStack {
+                Button("=>") {
+                    if self.htmlString_right == "" {
+                        self.htmlString_right = htmlString_left
+                    } else {
+                        do {
+                            
+                            let doc_left: Document = try SwiftSoup.parse(htmlString_left)
+                            let divElements_left = try doc_left.select("div.gs_r.gs_or.gs_scl")
+                            
+                            let doc_right: Document = try SwiftSoup.parse(htmlString_right)
+                            
+                            for div_left in divElements_left {
+                                let right = try doc_right.select("div.gs_r.gs_or.gs_scl")
+                                if let right_last = right.last() {
+                                    try right_last.after(div_left)
+                                }
                             }
+                            
+                            try self.htmlString_right = doc_right.outerHtml()
+                        } catch {
+                            print("Error parsing HTML")
                         }
-                     
-                        try self.htmlString_right = doc_right.outerHtml()
-                    } catch {
-                        print("Error parsing HTML")
                     }
+                }
+                
+                Button ("Save") {
+                    if let url = showSavePanel() {
+                        do {
+                            try htmlString_right.write(to: url, atomically: true, encoding: .utf8)
+                        } catch {
+                            print("Failed to save.")
+                        }
+                    }
+                        
                 }
             }
             
