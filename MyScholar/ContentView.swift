@@ -11,8 +11,35 @@ import WebKit
 
 import SwiftSoup
 
+import UniformTypeIdentifiers
+
+struct HTMLDocument: FileDocument {
+    static var readableContentTypes: [UTType] {[.html]}
+    var text: String
+    
+    init(text: String = "") {
+        self.text = text
+    }
+    
+    init(configuration: ReadConfiguration) throws {
+        guard let data = configuration.file.regularFileContents,
+              let content = String(data: data, encoding: .utf8) else {
+            throw CocoaError(.fileReadCorruptFile)
+        }
+        
+        self.text = content
+    }
+    
+    func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+        guard let data = text.data(using: .utf8) else {
+            throw CocoaError(.fileWriteInapplicableStringEncoding)
+        }
+        return FileWrapper(regularFileWithContents: data)
+    }
+}
+
 struct WebView: NSViewRepresentable {
-    let urlString: String
+    let initial_url: URL
     
     @Binding var htmlContent: String
 
@@ -26,8 +53,8 @@ struct WebView: NSViewRepresentable {
 
     func updateNSView(_ nsView: WKWebView, context: Context) {
         
-        if let url = URL(string: urlString) {
-            let request = URLRequest(url: url)
+        if nsView.url == nil {
+            let request = URLRequest(url: initial_url)
             nsView.load(request)
         }
     }
@@ -107,28 +134,28 @@ func showOpenPanel() -> URL? {
 
 struct ContentView: View {
     
-    @State var htmlString_left: String = ""
+    @Binding var document: HTMLDocument
     
-    @State private var htmlString_right: String = ""
+    @State var htmlString_left: String = ""
     
     var body: some View {
         HStack {
             WebView(
-                urlString: "https://scholar.google.com/",
+                initial_url: URL(string: "https://scholar.google.com/")!,
                 htmlContent: $htmlString_left
             )
             
             VStack {
                 Button("=>") {
-                    if self.htmlString_right == "" {
-                        self.htmlString_right = htmlString_left
+                    if self.document.text == "" {
+                        self.document.text = htmlString_left
                     } else {
                         do {
                             
                             let doc_left: Document = try SwiftSoup.parse(htmlString_left)
                             let divElements_left = try doc_left.select("div.gs_r.gs_or.gs_scl")
                             
-                            let doc_right: Document = try SwiftSoup.parse(htmlString_right)
+                            let doc_right: Document = try SwiftSoup.parse(document.text)
                             
                             for div_left in divElements_left {
                                 let right = try doc_right.select("div.gs_r.gs_or.gs_scl")
@@ -137,44 +164,22 @@ struct ContentView: View {
                                 }
                             }
                             
-                            try self.htmlString_right = doc_right.outerHtml()
+                            try self.document.text = doc_right.outerHtml()
                         } catch {
                             print("Error parsing HTML")
                         }
                     }
                 }
-
-                Button ("Open") {
-                    if let url = showOpenPanel() {
-                        do {
-                            htmlString_right = try String(contentsOf: url)
-                        } catch {
-                            print("Failed to open file.")
-                        }
-                    }
-                }
-                .keyboardShortcut("o", modifiers: .command)
-
-                Button ("Save") {
-                    if let url = showSavePanel() {
-                        do {
-                            try htmlString_right.write(to: url, atomically: true, encoding: .utf8)
-                        } catch {
-                            print("Failed to save.")
-                        }
-                    }
-                }
-                .keyboardShortcut("s", modifiers: .command)
             }
             
             WebViewWrapper(
-                htmlString: $htmlString_right
+                htmlString: $document.text
             )
             
         }
     }
 }
 
-#Preview {
-    ContentView()
-}
+//#Preview {
+//    ContentView()
+//}

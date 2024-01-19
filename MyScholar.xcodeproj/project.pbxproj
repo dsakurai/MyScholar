@@ -35,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		67E936322B59F54900515137 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		67E979CF2B57E4C70099E970 /* MyScholar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyScholar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		67E979D22B57E4C70099E970 /* MyScholarApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyScholarApp.swift; sourceTree = "<group>"; };
 		67E979D42B57E4C70099E970 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -97,6 +98,7 @@
 		67E979D12B57E4C70099E970 /* MyScholar */ = {
 			isa = PBXGroup;
 			children = (
+				67E936322B59F54900515137 /* Info.plist */,
 				67E979D22B57E4C70099E970 /* MyScholarApp.swift */,
 				67E979D42B57E4C70099E970 /* ContentView.swift */,
 				67E979D62B57E4C80099E970 /* Assets.xcassets */,
@@ -437,6 +439,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MyScholar/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -464,6 +467,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MyScholar/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

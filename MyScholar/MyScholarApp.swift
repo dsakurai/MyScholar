@@ -10,8 +10,9 @@ import SwiftUI
 @main
 struct MyScholarApp: App {
     var body: some Scene {
-        WindowGroup {
-            ContentView()
+        DocumentGroup(newDocument: HTMLDocument()) {
+            file in
+            ContentView(document: file.$document)
         }
     }
 }
