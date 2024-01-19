@@ -99,11 +99,49 @@ struct WebViewWrapper: NSViewRepresentable {
     }
 }
 
+public struct SlideableDivider: View {
+    @Binding var dimension: Double
+    @State private var dimensionStart: Double?
+
+    public init(dimension: Binding<Double>) {
+        self._dimension = dimension
+    }
+    
+    public var body: some View {
+        Rectangle().background(Color.gray).frame(width: 10)
+            .foregroundColor(Color(red: 0.9, green: 0.9, blue: 0.9))
+            .onHover { inside in
+                if inside {
+                    NSCursor.resizeLeftRight.push()
+                } else {
+                    NSCursor.pop()
+                }
+            }
+            .gesture(drag)
+    }
+    
+    var drag: some Gesture {
+        DragGesture(minimumDistance: 10, coordinateSpace: CoordinateSpace.global)
+            .onChanged { val in
+                if dimensionStart == nil {
+                    dimensionStart = dimension
+                }
+                let delta = val.location.x - val.startLocation.x
+                dimension = dimensionStart! + Double(delta)
+            }
+            .onEnded { val in
+                dimensionStart = nil
+            }
+    }
+}
+
 struct ContentView: View {
     
     @Binding var document: HTMLDocument
     
     @State var htmlString_left: String = ""
+    @State var draggableWidth: Double = 1000.0 // Should be 50%, like 0.5
+
     
     var body: some View {
         HStack {
@@ -111,7 +149,10 @@ struct ContentView: View {
                 initial_url: URL(string: "https://scholar.google.com/")!,
                 htmlContent: $htmlString_left
             )
+            .frame(width: CGFloat(draggableWidth))
             
+            SlideableDivider(dimension: $draggableWidth)
+
             
             VStack {
                 Button("=>") {
