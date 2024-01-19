@@ -1,13 +1,13 @@
 //
-//  ScholaryUITestsLaunchTests.swift
-//  ScholaryUITests
+//  ScholarlyUITestsLaunchTests.swift
+//  ScholarlyUITests
 //
 //  Created by Daisuke Sakurai on 2024/01/19.
 //
 
 import XCTest
 
-final class ScholaryUITestsLaunchTests: XCTestCase {
+final class ScholarlyUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true

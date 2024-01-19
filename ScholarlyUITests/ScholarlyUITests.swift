@@ -1,13 +1,13 @@
 //
-//  ScholaryUITests.swift
-//  ScholaryUITests
+//  ScholarlyUITests.swift
+//  ScholarlyUITests
 //
 //  Created by Daisuke Sakurai on 2024/01/19.
 //
 
 import XCTest
 
-final class ScholaryUITests: XCTestCase {
+final class ScholarlyUITests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
