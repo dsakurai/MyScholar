@@ -1,13 +1,13 @@
 //
-//  MyScholarUITestsLaunchTests.swift
-//  MyScholarUITests
+//  ScholaryUITestsLaunchTests.swift
+//  ScholaryUITests
 //
-//  Created by Daisuke Sakurai on 2024/01/17.
+//  Created by Daisuke Sakurai on 2024/01/19.
 //
 
 import XCTest
 
-final class MyScholarUITestsLaunchTests: XCTestCase {
+final class ScholaryUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true

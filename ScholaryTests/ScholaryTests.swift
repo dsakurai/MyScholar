@@ -1,14 +1,13 @@
 //
-//  MyScholarTests.swift
-//  MyScholarTests
+//  ScholaryTests.swift
+//  ScholaryTests
 //
-//  Created by Daisuke Sakurai on 2024/01/17.
+//  Created by Daisuke Sakurai on 2024/01/19.
 //
 
 import XCTest
-@testable import MyScholar
 
-final class MyScholarTests: XCTestCase {
+final class ScholaryTests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -28,7 +27,7 @@ final class MyScholarTests: XCTestCase {
 
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
-        self.measure {
+        measure {
             // Put the code you want to measure the time of here.
         }
     }
