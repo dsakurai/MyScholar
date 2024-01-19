@@ -7,142 +7,82 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		675316ED2B5AA7A200F115BA /* ScholarlyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675316EC2B5AA7A200F115BA /* ScholarlyApp.swift */; };
-		675316EF2B5AA7A200F115BA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675316EE2B5AA7A200F115BA /* ContentView.swift */; };
-		675316F12B5AA7A300F115BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 675316F02B5AA7A300F115BA /* Assets.xcassets */; };
-		675316F52B5AA7A300F115BA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 675316F42B5AA7A300F115BA /* Preview Assets.xcassets */; };
-		675316FF2B5AA7A300F115BA /* ScholarlyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675316FE2B5AA7A300F115BA /* ScholarlyTests.swift */; };
-		675317092B5AA7A300F115BA /* ScholarlyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675317082B5AA7A300F115BA /* ScholarlyUITests.swift */; };
-		6753170B2B5AA7A300F115BA /* ScholarlyUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6753170A2B5AA7A300F115BA /* ScholarlyUITestsLaunchTests.swift */; };
-		675317192B5AA7D500F115BA /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 675317182B5AA7D500F115BA /* SwiftSoup */; };
+		67BCC18B2B5AAD9B00458E3F /* ScholarlyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BCC18A2B5AAD9B00458E3F /* ScholarlyApp.swift */; };
+		67BCC18D2B5AAD9B00458E3F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BCC18C2B5AAD9B00458E3F /* ContentView.swift */; };
+		67BCC18F2B5AAD9D00458E3F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 67BCC18E2B5AAD9D00458E3F /* Assets.xcassets */; };
+		67BCC1922B5AAD9D00458E3F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 67BCC1912B5AAD9D00458E3F /* Preview Assets.xcassets */; };
+		67BCC19B2B5AADCD00458E3F /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 67BCC19A2B5AADCD00458E3F /* SwiftSoup */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		675316FB2B5AA7A300F115BA /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 675316E12B5AA7A200F115BA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 675316E82B5AA7A200F115BA;
-			remoteInfo = Scholarly;
-		};
-		675317052B5AA7A300F115BA /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 675316E12B5AA7A200F115BA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 675316E82B5AA7A200F115BA;
-			remoteInfo = Scholarly;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
-		675316E92B5AA7A200F115BA /* Scholarly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scholarly.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		675316EC2B5AA7A200F115BA /* ScholarlyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarlyApp.swift; sourceTree = "<group>"; };
-		675316EE2B5AA7A200F115BA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		675316F02B5AA7A300F115BA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		675316F22B5AA7A300F115BA /* Scholarly.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Scholarly.entitlements; sourceTree = "<group>"; };
-		675316F42B5AA7A300F115BA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		675316FA2B5AA7A300F115BA /* ScholarlyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ScholarlyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		675316FE2B5AA7A300F115BA /* ScholarlyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarlyTests.swift; sourceTree = "<group>"; };
-		675317042B5AA7A300F115BA /* ScholarlyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ScholarlyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		675317082B5AA7A300F115BA /* ScholarlyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarlyUITests.swift; sourceTree = "<group>"; };
-		6753170A2B5AA7A300F115BA /* ScholarlyUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarlyUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		6753171A2B5AA87600F115BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		67BCC1872B5AAD9B00458E3F /* Scholarly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scholarly.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		67BCC18A2B5AAD9B00458E3F /* ScholarlyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarlyApp.swift; sourceTree = "<group>"; };
+		67BCC18C2B5AAD9B00458E3F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		67BCC18E2B5AAD9D00458E3F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		67BCC1912B5AAD9D00458E3F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		67BCC1932B5AAD9D00458E3F /* Scholarly.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Scholarly.entitlements; sourceTree = "<group>"; };
+		67BCC19C2B5AADE800458E3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		675316E62B5AA7A200F115BA /* Frameworks */ = {
+		67BCC1842B5AAD9B00458E3F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				675317192B5AA7D500F115BA /* SwiftSoup in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		675316F72B5AA7A300F115BA /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		675317012B5AA7A300F115BA /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				67BCC19B2B5AADCD00458E3F /* SwiftSoup in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		675316E02B5AA7A200F115BA = {
+		67BCC17E2B5AAD9B00458E3F = {
 			isa = PBXGroup;
 			children = (
-				675316EB2B5AA7A200F115BA /* Scholarly */,
-				675316FD2B5AA7A300F115BA /* ScholarlyTests */,
-				675317072B5AA7A300F115BA /* ScholarlyUITests */,
-				675316EA2B5AA7A200F115BA /* Products */,
+				67BCC1892B5AAD9B00458E3F /* Scholarly */,
+				67BCC1882B5AAD9B00458E3F /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		675316EA2B5AA7A200F115BA /* Products */ = {
+		67BCC1882B5AAD9B00458E3F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				675316E92B5AA7A200F115BA /* Scholarly.app */,
-				675316FA2B5AA7A300F115BA /* ScholarlyTests.xctest */,
-				675317042B5AA7A300F115BA /* ScholarlyUITests.xctest */,
+				67BCC1872B5AAD9B00458E3F /* Scholarly.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		675316EB2B5AA7A200F115BA /* Scholarly */ = {
+		67BCC1892B5AAD9B00458E3F /* Scholarly */ = {
 			isa = PBXGroup;
 			children = (
-				6753171A2B5AA87600F115BA /* Info.plist */,
-				675316EC2B5AA7A200F115BA /* ScholarlyApp.swift */,
-				675316EE2B5AA7A200F115BA /* ContentView.swift */,
-				675316F02B5AA7A300F115BA /* Assets.xcassets */,
-				675316F22B5AA7A300F115BA /* Scholarly.entitlements */,
-				675316F32B5AA7A300F115BA /* Preview Content */,
+				67BCC19C2B5AADE800458E3F /* Info.plist */,
+				67BCC18A2B5AAD9B00458E3F /* ScholarlyApp.swift */,
+				67BCC18C2B5AAD9B00458E3F /* ContentView.swift */,
+				67BCC18E2B5AAD9D00458E3F /* Assets.xcassets */,
+				67BCC1932B5AAD9D00458E3F /* Scholarly.entitlements */,
+				67BCC1902B5AAD9D00458E3F /* Preview Content */,
 			);
 			path = Scholarly;
 			sourceTree = "<group>";
 		};
-		675316F32B5AA7A300F115BA /* Preview Content */ = {
+		67BCC1902B5AAD9D00458E3F /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
-				675316F42B5AA7A300F115BA /* Preview Assets.xcassets */,
+				67BCC1912B5AAD9D00458E3F /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		675316FD2B5AA7A300F115BA /* ScholarlyTests */ = {
-			isa = PBXGroup;
-			children = (
-				675316FE2B5AA7A300F115BA /* ScholarlyTests.swift */,
-			);
-			path = ScholarlyTests;
-			sourceTree = "<group>";
-		};
-		675317072B5AA7A300F115BA /* ScholarlyUITests */ = {
-			isa = PBXGroup;
-			children = (
-				675317082B5AA7A300F115BA /* ScholarlyUITests.swift */,
-				6753170A2B5AA7A300F115BA /* ScholarlyUITestsLaunchTests.swift */,
-			);
-			path = ScholarlyUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		675316E82B5AA7A200F115BA /* Scholarly */ = {
+		67BCC1862B5AAD9B00458E3F /* Scholarly */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6753170E2B5AA7A300F115BA /* Build configuration list for PBXNativeTarget "Scholarly" */;
+			buildConfigurationList = 67BCC1962B5AAD9D00458E3F /* Build configuration list for PBXNativeTarget "Scholarly" */;
 			buildPhases = (
-				675316E52B5AA7A200F115BA /* Sources */,
-				675316E62B5AA7A200F115BA /* Frameworks */,
-				675316E72B5AA7A200F115BA /* Resources */,
+				67BCC1832B5AAD9B00458E3F /* Sources */,
+				67BCC1842B5AAD9B00458E3F /* Frameworks */,
+				67BCC1852B5AAD9B00458E3F /* Resources */,
 			);
 			buildRules = (
 			);
@@ -150,72 +90,28 @@
 			);
 			name = Scholarly;
 			packageProductDependencies = (
-				675317182B5AA7D500F115BA /* SwiftSoup */,
+				67BCC19A2B5AADCD00458E3F /* SwiftSoup */,
 			);
 			productName = Scholarly;
-			productReference = 675316E92B5AA7A200F115BA /* Scholarly.app */;
+			productReference = 67BCC1872B5AAD9B00458E3F /* Scholarly.app */;
 			productType = "com.apple.product-type.application";
-		};
-		675316F92B5AA7A300F115BA /* ScholarlyTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 675317112B5AA7A300F115BA /* Build configuration list for PBXNativeTarget "ScholarlyTests" */;
-			buildPhases = (
-				675316F62B5AA7A300F115BA /* Sources */,
-				675316F72B5AA7A300F115BA /* Frameworks */,
-				675316F82B5AA7A300F115BA /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				675316FC2B5AA7A300F115BA /* PBXTargetDependency */,
-			);
-			name = ScholarlyTests;
-			productName = ScholarlyTests;
-			productReference = 675316FA2B5AA7A300F115BA /* ScholarlyTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		675317032B5AA7A300F115BA /* ScholarlyUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 675317142B5AA7A300F115BA /* Build configuration list for PBXNativeTarget "ScholarlyUITests" */;
-			buildPhases = (
-				675317002B5AA7A300F115BA /* Sources */,
-				675317012B5AA7A300F115BA /* Frameworks */,
-				675317022B5AA7A300F115BA /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				675317062B5AA7A300F115BA /* PBXTargetDependency */,
-			);
-			name = ScholarlyUITests;
-			productName = ScholarlyUITests;
-			productReference = 675317042B5AA7A300F115BA /* ScholarlyUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		675316E12B5AA7A200F115BA /* Project object */ = {
+		67BCC17F2B5AAD9B00458E3F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1500;
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
-					675316E82B5AA7A200F115BA = {
+					67BCC1862B5AAD9B00458E3F = {
 						CreatedOnToolsVersion = 15.0.1;
-					};
-					675316F92B5AA7A300F115BA = {
-						CreatedOnToolsVersion = 15.0.1;
-						TestTargetID = 675316E82B5AA7A200F115BA;
-					};
-					675317032B5AA7A300F115BA = {
-						CreatedOnToolsVersion = 15.0.1;
-						TestTargetID = 675316E82B5AA7A200F115BA;
 					};
 				};
 			};
-			buildConfigurationList = 675316E42B5AA7A200F115BA /* Build configuration list for PBXProject "Scholarly" */;
+			buildConfigurationList = 67BCC1822B5AAD9B00458E3F /* Build configuration list for PBXProject "Scholarly" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -223,91 +119,45 @@
 				en,
 				Base,
 			);
-			mainGroup = 675316E02B5AA7A200F115BA;
+			mainGroup = 67BCC17E2B5AAD9B00458E3F;
 			packageReferences = (
-				675317172B5AA7D500F115BA /* XCRemoteSwiftPackageReference "SwiftSoup" */,
+				67BCC1992B5AADCD00458E3F /* XCRemoteSwiftPackageReference "SwiftSoup" */,
 			);
-			productRefGroup = 675316EA2B5AA7A200F115BA /* Products */;
+			productRefGroup = 67BCC1882B5AAD9B00458E3F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				675316E82B5AA7A200F115BA /* Scholarly */,
-				675316F92B5AA7A300F115BA /* ScholarlyTests */,
-				675317032B5AA7A300F115BA /* ScholarlyUITests */,
+				67BCC1862B5AAD9B00458E3F /* Scholarly */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		675316E72B5AA7A200F115BA /* Resources */ = {
+		67BCC1852B5AAD9B00458E3F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				675316F52B5AA7A300F115BA /* Preview Assets.xcassets in Resources */,
-				675316F12B5AA7A300F115BA /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		675316F82B5AA7A300F115BA /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		675317022B5AA7A300F115BA /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				67BCC1922B5AAD9D00458E3F /* Preview Assets.xcassets in Resources */,
+				67BCC18F2B5AAD9D00458E3F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		675316E52B5AA7A200F115BA /* Sources */ = {
+		67BCC1832B5AAD9B00458E3F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				675316EF2B5AA7A200F115BA /* ContentView.swift in Sources */,
-				675316ED2B5AA7A200F115BA /* ScholarlyApp.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		675316F62B5AA7A300F115BA /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				675316FF2B5AA7A300F115BA /* ScholarlyTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		675317002B5AA7A300F115BA /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				6753170B2B5AA7A300F115BA /* ScholarlyUITestsLaunchTests.swift in Sources */,
-				675317092B5AA7A300F115BA /* ScholarlyUITests.swift in Sources */,
+				67BCC18D2B5AAD9B00458E3F /* ContentView.swift in Sources */,
+				67BCC18B2B5AAD9B00458E3F /* ScholarlyApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		675316FC2B5AA7A300F115BA /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 675316E82B5AA7A200F115BA /* Scholarly */;
-			targetProxy = 675316FB2B5AA7A300F115BA /* PBXContainerItemProxy */;
-		};
-		675317062B5AA7A300F115BA /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 675316E82B5AA7A200F115BA /* Scholarly */;
-			targetProxy = 675317052B5AA7A300F115BA /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin XCBuildConfiguration section */
-		6753170C2B5AA7A300F115BA /* Debug */ = {
+		67BCC1942B5AAD9D00458E3F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -360,15 +210,17 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
-		6753170D2B5AA7A300F115BA /* Release */ = {
+		67BCC1952B5AAD9D00458E3F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -415,19 +267,22 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
 			};
 			name = Release;
 		};
-		6753170F2B5AA7A300F115BA /* Debug */ = {
+		67BCC1972B5AAD9D00458E3F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Scholarly/Scholarly.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Scholarly/Preview Content\"";
 				DEVELOPMENT_TEAM = G6UU7GAZVQ;
@@ -435,38 +290,27 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Scholarly/Info.plist;
-				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
-				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
-				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
-				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
-				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
-				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
-				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
-				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
-				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dsakurai.Scholarly;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = macosx;
-				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
-		675317102B5AA7A300F115BA /* Release */ = {
+		67BCC1982B5AAD9D00458E3F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Scholarly/Scholarly.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Scholarly/Preview Content\"";
 				DEVELOPMENT_TEAM = G6UU7GAZVQ;
@@ -474,156 +318,36 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Scholarly/Info.plist;
-				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
-				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
-				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
-				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
-				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
-				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
-				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
-				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
-				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dsakurai.Scholarly;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = macosx;
-				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-			};
-			name = Release;
-		};
-		675317122B5AA7A300F115BA /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = G6UU7GAZVQ;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.dsakurai.ScholarlyTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Scholarly.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Scholarly";
-			};
-			name = Debug;
-		};
-		675317132B5AA7A300F115BA /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = G6UU7GAZVQ;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.dsakurai.ScholarlyTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Scholarly.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Scholarly";
-			};
-			name = Release;
-		};
-		675317152B5AA7A300F115BA /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = G6UU7GAZVQ;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.dsakurai.ScholarlyUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Scholarly;
-			};
-			name = Debug;
-		};
-		675317162B5AA7A300F115BA /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = G6UU7GAZVQ;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.dsakurai.ScholarlyUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Scholarly;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		675316E42B5AA7A200F115BA /* Build configuration list for PBXProject "Scholarly" */ = {
+		67BCC1822B5AAD9B00458E3F /* Build configuration list for PBXProject "Scholarly" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				6753170C2B5AA7A300F115BA /* Debug */,
-				6753170D2B5AA7A300F115BA /* Release */,
+				67BCC1942B5AAD9D00458E3F /* Debug */,
+				67BCC1952B5AAD9D00458E3F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6753170E2B5AA7A300F115BA /* Build configuration list for PBXNativeTarget "Scholarly" */ = {
+		67BCC1962B5AAD9D00458E3F /* Build configuration list for PBXNativeTarget "Scholarly" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				6753170F2B5AA7A300F115BA /* Debug */,
-				675317102B5AA7A300F115BA /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		675317112B5AA7A300F115BA /* Build configuration list for PBXNativeTarget "ScholarlyTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				675317122B5AA7A300F115BA /* Debug */,
-				675317132B5AA7A300F115BA /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		675317142B5AA7A300F115BA /* Build configuration list for PBXNativeTarget "ScholarlyUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				675317152B5AA7A300F115BA /* Debug */,
-				675317162B5AA7A300F115BA /* Release */,
+				67BCC1972B5AAD9D00458E3F /* Debug */,
+				67BCC1982B5AAD9D00458E3F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -631,7 +355,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		675317172B5AA7D500F115BA /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {
+		67BCC1992B5AADCD00458E3F /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/scinfu/SwiftSoup.git";
 			requirement = {
@@ -642,12 +366,12 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		675317182B5AA7D500F115BA /* SwiftSoup */ = {
+		67BCC19A2B5AADCD00458E3F /* SwiftSoup */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 675317172B5AA7D500F115BA /* XCRemoteSwiftPackageReference "SwiftSoup" */;
+			package = 67BCC1992B5AADCD00458E3F /* XCRemoteSwiftPackageReference "SwiftSoup" */;
 			productName = SwiftSoup;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
-	rootObject = 675316E12B5AA7A200F115BA /* Project object */;
+	rootObject = 67BCC17F2B5AAD9B00458E3F /* Project object */;
 }
