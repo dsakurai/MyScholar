@@ -122,6 +122,18 @@ struct WebView: NSViewRepresentable {
                 }
             }
         }
+        
+        func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+            if let url = navigationAction.request.url {
+                if url.host != "scholar.google.com" {
+                    NSWorkspace.shared.open(url)
+                    decisionHandler(.cancel)
+                    return
+                }
+            }
+
+            decisionHandler(.allow)
+        }
     }
 }
 
@@ -129,12 +141,41 @@ struct WebViewWrapper: NSViewRepresentable {
     @Binding var htmlString: String
     
     func makeNSView(context: Context) -> WKWebView {
-        return WKWebView()
+        
+        let webView = WKWebView()
+        webView.navigationDelegate = context.coordinator
+
+        return webView
     }
     
     func updateNSView(_ nsView: WKWebView, context: Context) {
         nsView.loadHTMLString(htmlString, baseURL: URL(string: "https://scholar.google.com")!)
     }
+    
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
+    
+    class Coordinator: NSObject, WKNavigationDelegate {
+        var parent: WebViewWrapper
+        
+        init(_ parent: WebViewWrapper) {
+            self.parent = parent
+        }
+        
+        func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+            if let url = navigationAction.request.url {
+                if url.host != "scholar.google.com" {
+                    NSWorkspace.shared.open(url)
+                    decisionHandler(.cancel)
+                    return
+                }
+            }
+
+            decisionHandler(.allow)
+        }
+    }
+
 }
 
 public struct SlideableDivider: View {
