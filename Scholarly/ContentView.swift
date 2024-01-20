@@ -38,6 +38,26 @@ struct HTMLDocument: FileDocument {
     }
 }
 
+func fetchJavaScript(from url: URL) async -> String? {
+    do {
+        let (data, _) = try await URLSession.shared.data(from: url)
+        return String(data: data, encoding: .utf8)
+    } catch {
+        print("Error fetching JavaScript: \(error)")
+        return nil
+    }
+}
+//
+//func injectJavaScript(webView: WKWebView, scriptContent: String) {
+//    webView.evaluateJavaScript(scriptContent) { result, error in
+//        if let error = error {
+//            print("Error injecting JavaScript: \(error)")
+//        } else {
+//            print("JavaScript injected successfully")
+//        }
+//    }
+//}
+
 struct WebView: NSViewRepresentable {
     
     let initial_url: URL
@@ -46,6 +66,29 @@ struct WebView: NSViewRepresentable {
 
     func makeNSView(context: Context) -> WKWebView {
         let webView = WKWebView()
+        
+        var userscript: String = ""
+        
+        Task { // Load mark.js
+            userscript = await fetchJavaScript(from: URL(string: "https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js")!)!
+        }
+//        
+//        let config = WKWebViewConfiguration()
+//        let script = WKUserScript(source: userscript, injectionTime: .atDocumentStart, forMainFrameOnly: true)
+//        config.userContentController.addUserScript(script)
+//        
+//        let userscript2 = """
+//        function highlightText() {
+//            var searchTerm = document.getElementById("searchInput").value;
+//            var markInstance = new Mark(document.body);
+//            markInstance.mark(searchTerm, { className: "highlight"});
+//        }
+//
+//        var searchBoxHtml = '<input type="text" id="searchInput" placeholder="Search text"><button onclick="highlightText()">Highlight</button>';
+//        document.body.innerHTML = searchBoxHtml + document.body.innerHTML;
+//        """
+//        
+//        config.userContentController.addUserScript(WKUserScript(source: userscript2, injectionTime: .atDocumentStart, forMainFrameOnly: true))
         
         webView.navigationDelegate = context.coordinator
         
@@ -70,8 +113,64 @@ struct WebView: NSViewRepresentable {
         init(_ parent: WebView) {
             self.parent = parent
         }
-                
+        
+//        func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
+
+            // Open in Safari
+//            if (navigationAction.navigationType == WKNavigationType.LinkActivated && !navigationAction.request.URL.host!.lowercaseString.hasPrefix("www.appcoda.com")) {
+//                UIApplication.sharedApplication().openURL(navigationAction.request.URL)
+//                decisionHandler(WKNavigationActionPolicy.Cancel)
+//            } else {
+//                decisionHandler(WKNavigationActionPolicy.Allow)
+//            }
+
+//        }
+
         func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+            
+//            // Seems I need to inject this before loading the html...
+//            
+//            // JavaScript to add a search box and button, and the search functionality
+//            let injectScript = """
+//            document.head.innerHTML = '<style>.highlight {background-color: yellow;font-weight: bold;}</style><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js"></script>' + document.head.innerHTML
+//
+//            var searchBoxHtml = '<input type="text" id="searchInput" placeholder="Search text"><button onclick="highlightText()">Highlight</button> <script>function highlightText() { var searchTerm = document.getElementById("searchInput").value; var markInstance = new Mark(document.body); markInstance.mark(searchTerm, { className: "highlight"});}</script>';
+//            document.body.innerHTML = searchBoxHtml + document.body.innerHTML;
+//            """
+//
+//            webView.evaluateJavaScript(injectScript, completionHandler: nil)
+  
+            
+            
+            let injectScript = """
+            var searchBoxHtml = '<input type="text" id="searchInput" placeholder="Enter search term"> <button onclick="highlightSearchTerm()">Search</button>';
+            document.body.innerHTML = searchBoxHtml + document.body.innerHTML;
+
+            function highlightSearchTerm() {
+                var searchTerm = document.getElementById('searchInput').value;
+
+                document.querySelectorAll('.highlight').forEach(function(el) {
+                    el.classList.remove('highlight');
+                });
+
+                if (searchTerm) {
+                    var regex = new RegExp(searchTerm, 'gi');
+                    var bodyText = document.body.innerHTML;
+
+                    var newBodyText = bodyText.replace(regex, function(match) {
+                        return '<span class="highlight">' + match + '</span>';
+                    });
+                    document.body.innerHTML = newBodyText;
+                }
+            }
+
+            var style = document.createElement('style');
+            style.innerHTML = '.highlight { background-color: yellow; }';
+            document.head.appendChild(style);
+            """
+
+            webView.evaluateJavaScript(injectScript, completionHandler: nil)
+
             webView.evaluateJavaScript("document.documentElement.outerHTML.toString()") {
                 (html, error) in
                 
