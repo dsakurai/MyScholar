@@ -196,6 +196,21 @@ struct ContentView: View {
                 Button("=>") {
                     if self.document.text == "" {
                         self.document.text = htmlString_left
+                        
+                        do {
+                            let doc_right: Document = try SwiftSoup.parse(document.text)
+                            
+                            if let head = doc_right.head(), let body = doc_right.body() {
+                                try head.append("<script src=\"\(mark_js_url)\"></script>")
+                                try body.prepend(search_box)
+                                try body.append("<script>\(function_highlightSearchTerm_str)</script>")
+                                
+                                try self.document.text = doc_right.outerHtml()
+                            }
+                        } catch {
+                            print("Failed to insert search box in the web view on the right hand side")
+                        }
+
                     } else {
                         do {
                             
