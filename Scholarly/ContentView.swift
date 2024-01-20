@@ -48,6 +48,19 @@ func fetchJavaScript(from url: URL) async -> String? {
     }
 }
 
+let mark_js_url: URL = URL(string: "https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js")!;
+let search_box: String = """
+    <input type="text" id="searchInput" placeholder="Enter search term"> <button onclick="highlightSearchTerm()">Search</button>
+"""
+let function_highlightSearchTerm_str: String = """
+     function highlightSearchTerm() {
+         var searchTerm = document.getElementById("searchInput").value;
+         var markInstance = new Mark(document.body);
+         markInstance.unmark();
+         markInstance.mark(searchTerm, { className: "highlight"});
+     }
+"""
+
 struct WebView: NSViewRepresentable {
     
     let initial_url: URL
@@ -83,20 +96,13 @@ struct WebView: NSViewRepresentable {
 
         func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
             
-            Task { // Load mark.js
-                let markjs = await fetchJavaScript(from: URL(string: "https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js")!)
+            Task {
+                let markjs = await fetchJavaScript(from: mark_js_url)  // Download mark.js file
                 
                 if let markjs = markjs {
                     let injectScript = markjs + """
-                        var searchBoxHtml = '<input type="text" id="searchInput" placeholder="Enter search term"> <button onclick="highlightSearchTerm()">Search</button>';
-                        document.body.innerHTML = searchBoxHtml + document.body.innerHTML;
-
-                        function highlightSearchTerm() {
-                            var searchTerm = document.getElementById("searchInput").value;
-                            var markInstance = new Mark(document.body);
-                            markInstance.unmark();
-                            markInstance.mark(searchTerm, { className: "highlight"});
-                        }
+                        document.body.innerHTML = '\(search_box)' + document.body.innerHTML;
+                        \(function_highlightSearchTerm_str)
                     """
 
                     await webView.evaluateJavaScript(injectScript, completionHandler: nil)
