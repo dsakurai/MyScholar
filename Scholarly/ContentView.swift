@@ -236,9 +236,10 @@ struct ContentView: View {
             VStack {
                 Button("=>") {
                     if self.document.text == "" {
+                        // Copy the left HTML to the right
                         self.document.text = htmlString_left
                         
-                        do {
+                        do { // Add search box
                             let doc_right: Document = try SwiftSoup.parse(document.text)
                             
                             if let head = doc_right.head(), let body = doc_right.body() {
@@ -254,6 +255,7 @@ struct ContentView: View {
 
                     } else {
                         do {
+                            // Add search box
                             
                             let doc_left: Document = try SwiftSoup.parse(htmlString_left)
                             let divElements_left = try doc_left.select("div.gs_r.gs_or.gs_scl")
