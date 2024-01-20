@@ -139,37 +139,52 @@ struct WebView: NSViewRepresentable {
 //            """
 //
 //            webView.evaluateJavaScript(injectScript, completionHandler: nil)
-  
             
-            
-            let injectScript = """
-            var searchBoxHtml = '<input type="text" id="searchInput" placeholder="Enter search term"> <button onclick="highlightSearchTerm()">Search</button>';
-            document.body.innerHTML = searchBoxHtml + document.body.innerHTML;
+            Task { // Load mark.js
+                let userscript = await fetchJavaScript(from: URL(string: "https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js")!)
+                
+                let injectScript = userscript! + """
+                    var searchBoxHtml = '<input type="text" id="searchInput" placeholder="Enter search term"> <button onclick="highlightSearchTerm()">Search</button>';
+                    document.body.innerHTML = searchBoxHtml + document.body.innerHTML;
 
-            function highlightSearchTerm() {
-                var searchTerm = document.getElementById('searchInput').value;
+                    function highlightSearchTerm() {
+                        var searchTerm = document.getElementById("searchInput").value;
+                        var markInstance = new Mark(document.body);
+                        markInstance.mark(searchTerm, { className: "highlight"});
+                    }
+                """
 
-                document.querySelectorAll('.highlight').forEach(function(el) {
-                    el.classList.remove('highlight');
-                });
+                
+//                let injectScript = userscript! + """
+//                var searchBoxHtml = '<input type="text" id="searchInput" placeholder="Enter search term"> <button onclick="highlightSearchTerm()">Search</button>';
+//                document.body.innerHTML = searchBoxHtml + document.body.innerHTML;
+//
+//                function highlightSearchTerm() {
+//                    var searchTerm = document.getElementById('searchInput').value;
+//
+//                    document.querySelectorAll('.highlight').forEach(function(el) {
+//                        el.classList.remove('highlight');
+//                    });
+//
+//                    if (searchTerm) {
+//                        var regex = new RegExp(searchTerm, 'gi');
+//                        var bodyText = document.body.innerHTML;
+//
+//                        var newBodyText = bodyText.replace(regex, function(match) {
+//                            return '<span class="highlight">' + match + '</span>';
+//                        });
+//                        document.body.innerHTML = newBodyText;
+//                    }
+//                }
+//
+//                var style = document.createElement('style');
+//                style.innerHTML = '.highlight { background-color: yellow; }';
+//                document.head.appendChild(style);
+//                """
 
-                if (searchTerm) {
-                    var regex = new RegExp(searchTerm, 'gi');
-                    var bodyText = document.body.innerHTML;
-
-                    var newBodyText = bodyText.replace(regex, function(match) {
-                        return '<span class="highlight">' + match + '</span>';
-                    });
-                    document.body.innerHTML = newBodyText;
-                }
+                await webView.evaluateJavaScript(injectScript, completionHandler: nil)
             }
-
-            var style = document.createElement('style');
-            style.innerHTML = '.highlight { background-color: yellow; }';
-            document.head.appendChild(style);
-            """
-
-            webView.evaluateJavaScript(injectScript, completionHandler: nil)
+            
 
             webView.evaluateJavaScript("document.documentElement.outerHTML.toString()") {
                 (html, error) in
