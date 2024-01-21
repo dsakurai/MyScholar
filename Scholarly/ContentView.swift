@@ -162,10 +162,14 @@ struct WebView: NSViewRepresentable {
     }
 }
 
+class Reload {
+    var flag = true
+}
+
 struct WebViewWrapper: NSViewRepresentable {
     @Binding var htmlString: String
     @Binding var searchText: String
-    @Binding var reload: Bool
+    @Binding var reload: Reload
     
     func makeNSView(context: Context) -> WKWebView {
         
@@ -182,22 +186,24 @@ struct WebViewWrapper: NSViewRepresentable {
         // If there's no HTML, yet, we need to load it.
         // This check is done by trying to evaluate this JavaScript.
         
-        nsView.evaluateJavaScript(
-            highlight_text_javascript(text: searchText)
-        ) {
+        if reload.flag {
+            nsView.loadHTMLString(htmlString, baseURL: URL(string: "https://scholar.google.com")!)
+            reload.flag = false
+        } else {
             
-            (_, error) in
-       
-            if let error = error {
-                // Handle the error
-                print("Error getting HTML string: \(error.localizedDescription)")
-            }
-             
-            if reload {
-                nsView.loadHTMLString(htmlString, baseURL: URL(string: "https://scholar.google.com")!)
-                reload = false
+            nsView.evaluateJavaScript(
+                highlight_text_javascript(text: searchText)
+            ) {
+                
+                (_, error) in
+                
+                if let error = error {
+                    // Handle the error
+                    print("Error getting HTML string: \(error.localizedDescription)")
+                }
             }
         }
+            
     }
     
     func makeCoordinator() -> Coordinator {
@@ -278,7 +284,7 @@ struct ContentView: View {
 
     @State private var searchTextLeft = ""
     @State private var searchTextRight = ""
-    @State private var reloadRight = true
+    @State private var reloadRight = Reload()
     
     var body: some View {
         HStack {
@@ -376,7 +382,7 @@ struct ContentView: View {
                             print("Error parsing HTML")
                         }
                     }
-                    reloadRight = true
+                    reloadRight.flag = true
                 }
             }
             
