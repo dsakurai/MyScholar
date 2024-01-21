@@ -146,14 +146,20 @@ struct WebView: NSViewRepresentable {
     }
 }
 
-class Reload {
-    var flag = true
+class Flag {
+    var flag: Bool
+    
+    init(flag: Bool) {
+        self.flag = flag
+    }
 }
 
 struct WebViewWrapper: NSViewRepresentable {
     @Binding var htmlString: String
+    
     @Binding var searchText: String
-    @Binding var reload: Reload
+    @Binding var reload: Flag
+    @Binding var remove: Bool
     
     func makeNSView(context: Context) -> WKWebView {
         
@@ -184,6 +190,30 @@ struct WebViewWrapper: NSViewRepresentable {
                 if let error = error {
                     // Handle the error
                     print("Error getting HTML string: \(error.localizedDescription)")
+                }
+                
+                nsView.evaluateJavaScript(
+                    """
+                    (function () {
+                        const selectedElements = document.querySelectorAll('.selected');
+                    
+                        selectedElements.forEach( function(element) {
+                            element.remove();
+                        });
+                    
+                        return document.documentElement.outerHTML.toString();
+                    })();
+
+                    // const html_string = document.documentElement.outerHTML.toString();
+                    // window.webkit.messageHandlers.selection_handler.postMessage(html_string);
+                    """
+                ) {
+                    (html, error) in
+                    if let error = error {
+                        // Handle the error
+                        print("Error getting HTML string: \(error.localizedDescription)")
+                    }
+                        
                 }
             }
         }
@@ -268,7 +298,8 @@ struct ContentView: View {
 
     @State private var searchTextLeft = ""
     @State private var searchTextRight = ""
-    @State private var reloadRight = Reload()
+    @State private var reloadRight = Flag(flag: true)
+    @State private var removeRight = false
     
     var body: some View {
         HStack {
@@ -372,11 +403,15 @@ struct ContentView: View {
                 WebViewWrapper(
                     htmlString: $document.text,
                     searchText: $searchTextRight,
-                    reload: $reloadRight
+                    reload: $reloadRight,
+                    remove: $removeRight
                 )
                 HStack {
                     TextField ("Search", text: $searchTextRight)
                         .border(Color.gray, width: 1)
+                    Button ("Remove selections") {
+                        removeRight.toggle()
+                    }
                 }
             }
             
