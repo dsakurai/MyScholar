@@ -177,55 +177,54 @@ struct WebViewWrapper: NSViewRepresentable {
         if reload.flag {
             nsView.loadHTMLString(htmlString, baseURL: URL(string: "https://scholar.google.com")!)
             reload.flag = false
-        } else {
+            return
+        }
             
-            if !button_pressed.flag {
-                return
-            } else {
-                button_pressed.flag = false
+        if !button_pressed.flag {
+            return
+        } else {
+            button_pressed.flag = false
+        }
+
+
+        nsView.evaluateJavaScript(
+            highlight_text_javascript(text: searchText)
+        ) {
+            
+            (_, error) in
+            
+            if let error = error {
+                // Handle the error
+                print("Error getting HTML string: \(error.localizedDescription)")
             }
-
-
-
+            
             nsView.evaluateJavaScript(
-                highlight_text_javascript(text: searchText)
+            """
+            (function () {
+                const selectedElements = document.querySelectorAll('.selected');
+            
+                selectedElements.forEach( function(element) {
+                    element.remove();
+                });
+            
+                return document.documentElement.outerHTML.toString();
+            })();
+            
+            // const html_string = document.documentElement.outerHTML.toString();
+            // window.webkit.messageHandlers.selection_handler.postMessage(html_string);
+            """
             ) {
-                
-                (_, error) in
-                
+                (html, error) in
                 if let error = error {
                     // Handle the error
                     print("Error getting HTML string: \(error.localizedDescription)")
+                } else {
+                    htmlString = html as! String
                 }
                 
-                nsView.evaluateJavaScript(
-                """
-                (function () {
-                    const selectedElements = document.querySelectorAll('.selected');
-                
-                    selectedElements.forEach( function(element) {
-                        element.remove();
-                    });
-                
-                    return document.documentElement.outerHTML.toString();
-                })();
-                
-                // const html_string = document.documentElement.outerHTML.toString();
-                // window.webkit.messageHandlers.selection_handler.postMessage(html_string);
-                """
-                ) {
-                    (html, error) in
-                    if let error = error {
-                        // Handle the error
-                        print("Error getting HTML string: \(error.localizedDescription)")
-                    } else {
-                        htmlString = html as! String
-                    }
-                    
-                }
             }
         }
-            
+
     }
     
     func makeCoordinator() -> Coordinator {
