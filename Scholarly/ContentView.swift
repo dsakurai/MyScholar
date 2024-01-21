@@ -165,6 +165,7 @@ struct WebView: NSViewRepresentable {
 struct WebViewWrapper: NSViewRepresentable {
     @Binding var htmlString: String
     @Binding var searchText: String
+    @Binding var reload: Bool
     
     func makeNSView(context: Context) -> WKWebView {
         
@@ -178,25 +179,25 @@ struct WebViewWrapper: NSViewRepresentable {
     
     func updateNSView(_ nsView: WKWebView, context: Context) {
 
-        if nsView.url == nil {
-            nsView.loadHTMLString(htmlString, baseURL: URL(string: "https://scholar.google.com")!)
-        }
+        // If there's no HTML, yet, we need to load it.
+        // This check is done by trying to evaluate this JavaScript.
         
         nsView.evaluateJavaScript(
             highlight_text_javascript(text: searchText)
         ) {
             
-            (html, error) in
-            
-            if let htmlString = html as? String {
-                    // Now htmlString contains the entire HTML content of the page
-                    //                self.parent.htmlContent = htmlString
-            } else if let error = error {
+            (_, error) in
+       
+            if let error = error {
                 // Handle the error
                 print("Error getting HTML string: \(error.localizedDescription)")
             }
+             
+            if reload {
+                nsView.loadHTMLString(htmlString, baseURL: URL(string: "https://scholar.google.com")!)
+                reload = false
+            }
         }
-        
     }
     
     func makeCoordinator() -> Coordinator {
@@ -277,6 +278,7 @@ struct ContentView: View {
 
     @State private var searchTextLeft = ""
     @State private var searchTextRight = ""
+    @State private var reloadRight = true
     
     var body: some View {
         HStack {
@@ -374,13 +376,15 @@ struct ContentView: View {
                             print("Error parsing HTML")
                         }
                     }
+                    reloadRight = true
                 }
             }
             
             VStack {
                 WebViewWrapper(
                     htmlString: $document.text,
-                    searchText: $searchTextRight
+                    searchText: $searchTextRight,
+                    reload: $reloadRight
                 )
                 HStack {
                     TextField ("Search", text: $searchTextRight)
