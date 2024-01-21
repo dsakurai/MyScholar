@@ -61,11 +61,21 @@ let function_highlightSearchTerm_str: String = """
      }
 """
 
+func highlight_text_javascript(text: String) -> String {
+    return """
+             var markInstance = new Mark(document.body);
+             markInstance.unmark();
+             markInstance.mark("\(text)", { className: "highlight"});
+    """
+
+}
+
 struct WebView: NSViewRepresentable {
     
     let initial_url: URL
     
     @Binding var htmlContent: String
+    @Binding var searchText: String
 
     func makeNSView(context: Context) -> WKWebView {
         let webView = WKWebView()
@@ -80,6 +90,21 @@ struct WebView: NSViewRepresentable {
         if nsView.url == nil {
             let request = URLRequest(url: initial_url)
             nsView.load(request)
+        }
+        
+        nsView.evaluateJavaScript(
+            highlight_text_javascript(text: searchText)
+        ) {
+            
+            (html, error) in
+            
+            if let htmlString = html as? String {
+                    // Now htmlString contains the entire HTML content of the page
+                    //                self.parent.htmlContent = htmlString
+            } else if let error = error {
+                // Handle the error
+                print("Error getting HTML string: \(error.localizedDescription)")
+            }
         }
     }
     
@@ -158,12 +183,7 @@ struct WebViewWrapper: NSViewRepresentable {
         }
         
         nsView.evaluateJavaScript(
-                            """
-                                     var searchTerm = "\(searchText)"
-                                     var markInstance = new Mark(document.body);
-                                     markInstance.unmark();
-                                     markInstance.mark(searchTerm, { className: "highlight"});
-                            """
+            highlight_text_javascript(text: searchText)
         ) {
             
             (html, error) in
@@ -255,15 +275,21 @@ struct ContentView: View {
     @State var htmlString_left: String = ""
     @State var draggableWidth: Double = 1000.0 // Should be 50%, like 0.5
 
+    @State private var searchTextLeft = ""
     @State private var searchTextRight = ""
     
     var body: some View {
         HStack {
-            WebView(
-                initial_url: URL(string: "https://scholar.google.com/")!,
-                htmlContent: $htmlString_left
-            )
-            .frame(width: CGFloat(draggableWidth))
+            VStack {
+                WebView(
+                    initial_url: URL(string: "https://scholar.google.com/")!,
+                    htmlContent: $htmlString_left,
+                    searchText: $searchTextLeft
+                )
+                .frame(width: CGFloat(draggableWidth))
+                
+                TextField ("Search", text: $searchTextLeft)
+            }
             
             SlideableDivider(dimension: $draggableWidth)
 
