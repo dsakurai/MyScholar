@@ -144,6 +144,8 @@ struct WebViewWrapper: NSViewRepresentable {
         
         let webView = WKWebView()
         webView.navigationDelegate = context.coordinator
+        
+        webView.configuration.userContentController.add(context.coordinator as WKScriptMessageHandler, name: "selection_handler")
 
         return webView
     }
@@ -156,7 +158,7 @@ struct WebViewWrapper: NSViewRepresentable {
         Coordinator(self)
     }
     
-    class Coordinator: NSObject, WKNavigationDelegate {
+    class Coordinator: NSObject, WKNavigationDelegate, WKScriptMessageHandler {
         var parent: WebViewWrapper
         
         init(_ parent: WebViewWrapper) {
@@ -174,6 +176,13 @@ struct WebViewWrapper: NSViewRepresentable {
 
             decisionHandler(.allow)
         }
+        
+        func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+            if message.name == "selection_handler" {
+                parent.htmlString = message.body as! String
+            }
+        }
+
     }
 
 }
@@ -242,10 +251,49 @@ struct ContentView: View {
                         do { // Add search box
                             let doc_right: Document = try SwiftSoup.parse(document.text)
                             
+                            // Maybe we can remove text inside JavaScript?
+                            
                             if let head = doc_right.head(), let body = doc_right.body() {
                                 try head.append("<script src=\"\(mark_js_url)\"></script>")
                                 try body.prepend(search_box)
                                 try body.append("<script>\(function_highlightSearchTerm_str)</script>")
+                                
+                                // TODO should be a WebKit user script instead
+                                try head.append("<style> .selected { background-color: yellow;} </style>")
+                                
+                                try body.append("""
+                                    <script>
+                                        document.addEventListener('DOMContentLoaded', (event) => {
+                                            const elements = document.querySelectorAll('.gs_r.gs_or.gs_scl');
+
+                                            elements.forEach(element => {
+                                                element.addEventListener('click', function() {
+                                                    this.classList.toggle('selected');
+                                
+                                                    // window.webkit.messageHandlers.selection_handler.postMessage('Clicked!');
+                                                });
+                                            });
+                                        });
+                                    </script>
+                                """)
+                                
+                                try body.prepend("""
+                                <button id="removeButton">Remove Selected Elements</button>
+                                """)
+                                try body.append("""
+                                <script>
+                                document.getElementById('removeButton').addEventListener('click', function() {
+                                    const selectedElements = document.querySelectorAll('.selected');
+                                    selectedElements.forEach(function(element) {
+                                        element.remove();
+                                    });
+                                
+                                    const html_string = document.documentElement.outerHTML.toString()
+                                    window.webkit.messageHandlers.selection_handler.postMessage(html_string);
+                                });
+                                </script>
+                                """)
+
                                 
                                 try self.document.text = doc_right.outerHtml()
                             }
