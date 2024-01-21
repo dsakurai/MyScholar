@@ -49,17 +49,6 @@ func fetchJavaScript(from url: URL) async -> String? {
 }
 
 let mark_js_url: URL = URL(string: "https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js")!;
-let search_box: String = """
-    <input type="text" id="searchInput" placeholder="Enter search term"> <button onclick="highlightSearchTerm()">Search</button>
-"""
-let function_highlightSearchTerm_str: String = """
-     function highlightSearchTerm() {
-         var searchTerm = document.getElementById("searchInput").value;
-         var markInstance = new Mark(document.body);
-         markInstance.unmark();
-         markInstance.mark(searchTerm, { className: "highlight"});
-     }
-"""
 
 func highlight_text_javascript(text: String) -> String {
     return """
@@ -125,12 +114,7 @@ struct WebView: NSViewRepresentable {
                 let markjs = await fetchJavaScript(from: mark_js_url)  // Download mark.js file
                 
                 if let markjs = markjs {
-                    let injectScript = markjs + """
-                        document.body.innerHTML = '\(search_box)' + document.body.innerHTML;
-                        \(function_highlightSearchTerm_str)
-                    """
-
-                    await webView.evaluateJavaScript(injectScript, completionHandler: nil)
+                    await webView.evaluateJavaScript(markjs, completionHandler: nil)
                 }
             }
             
@@ -315,8 +299,6 @@ struct ContentView: View {
                             
                             if let head = doc_right.head(), let body = doc_right.body() {
                                 try head.append("<script src=\"\(mark_js_url)\"></script>")
-                                try body.prepend(search_box)
-                                try body.append("<script>\(function_highlightSearchTerm_str)</script>")
                                 
                                 // TODO should be a WebKit user script instead
                                 try head.append("<style> .selected { background-color: yellow;} </style>")
