@@ -159,6 +159,7 @@ struct WebViewWrapper: NSViewRepresentable {
     
     @Binding var searchText: String
     @Binding var reload: Flag
+    @Binding var button_pressed: Flag
     @Binding var remove: Bool
     
     func makeNSView(context: Context) -> WKWebView {
@@ -172,15 +173,20 @@ struct WebViewWrapper: NSViewRepresentable {
     }
     
     func updateNSView(_ nsView: WKWebView, context: Context) {
-
-        // If there's no HTML, yet, we need to load it.
-        // This check is done by trying to evaluate this JavaScript.
         
         if reload.flag {
             nsView.loadHTMLString(htmlString, baseURL: URL(string: "https://scholar.google.com")!)
             reload.flag = false
         } else {
             
+            if !button_pressed.flag {
+                return
+            } else {
+                button_pressed.flag = false
+            }
+
+
+
             nsView.evaluateJavaScript(
                 highlight_text_javascript(text: searchText)
             ) {
@@ -193,27 +199,29 @@ struct WebViewWrapper: NSViewRepresentable {
                 }
                 
                 nsView.evaluateJavaScript(
-                    """
-                    (function () {
-                        const selectedElements = document.querySelectorAll('.selected');
-                    
-                        selectedElements.forEach( function(element) {
-                            element.remove();
-                        });
-                    
-                        return document.documentElement.outerHTML.toString();
-                    })();
-
-                    // const html_string = document.documentElement.outerHTML.toString();
-                    // window.webkit.messageHandlers.selection_handler.postMessage(html_string);
-                    """
+                """
+                (function () {
+                    const selectedElements = document.querySelectorAll('.selected');
+                
+                    selectedElements.forEach( function(element) {
+                        element.remove();
+                    });
+                
+                    return document.documentElement.outerHTML.toString();
+                })();
+                
+                // const html_string = document.documentElement.outerHTML.toString();
+                // window.webkit.messageHandlers.selection_handler.postMessage(html_string);
+                """
                 ) {
                     (html, error) in
                     if let error = error {
                         // Handle the error
                         print("Error getting HTML string: \(error.localizedDescription)")
+                    } else {
+                        htmlString = html as! String
                     }
-                        
+                    
                 }
             }
         }
@@ -300,6 +308,7 @@ struct ContentView: View {
     @State private var searchTextRight = ""
     @State private var reloadRight = Flag(flag: true)
     @State private var removeRight = false
+    @State private var button_pressedRight = Flag(flag: false)
     
     var body: some View {
         HStack {
@@ -396,6 +405,7 @@ struct ContentView: View {
                         }
                     }
                     reloadRight.flag = true
+                    button_pressedRight.flag = true
                 }
             }
             
@@ -404,12 +414,14 @@ struct ContentView: View {
                     htmlString: $document.text,
                     searchText: $searchTextRight,
                     reload: $reloadRight,
+                    button_pressed: $button_pressedRight,
                     remove: $removeRight
                 )
                 HStack {
                     TextField ("Search", text: $searchTextRight)
                         .border(Color.gray, width: 1)
                     Button ("Remove selections") {
+                        button_pressedRight.flag = true
                         removeRight.toggle()
                     }
                 }
